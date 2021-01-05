@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    image: frontend-exercise:2.6
+    ports:
+      - 5000:5000
+    container_name: frontend-example
+  backend:
+    build: ./backend
+    image: backend-exercise:2.6
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/logs.txt:/backend-example-docker/logs.txt
+    container_name: backend-example
+    networks:
+      - redis
+      - postgres
+    environment:
+      - REDIS=cache
+      - REDIS_PORT=6379
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=example
+      - DB_HOST=db
+  cache:
+    image: redis
+    container_name: redis-cache
+    restart: unless-stopped
+    networks:
+      - redis
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: example
+    container_name: db_backend
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    networks:
+      - postgres
+
+volumes:
+  database:
+networks:
+  redis:
+  postgres:

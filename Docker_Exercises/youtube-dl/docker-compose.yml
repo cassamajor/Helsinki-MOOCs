@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  youtube-dl-ubuntu:
+    image: youtube-dl
+    build: .
+    volumes:
+      - .:/app
+    container_name: youtube-dl
+
+
+# docker-compose run youtube-dl-ubuntu https://imgur.com/JY5tHqr

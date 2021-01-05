@@ -1,0 +1,9 @@
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+frontend-exercise     2.10                a7cf654f58d7        8 days ago          1.12GB
+backend-exercise      2.10                832b23e16066        10 days ago         930MB
+
+..
+
+REPOSITORY          TAG                IMAGE ID            CREATED             SIZE
+frontend-exercise   3.1                7cf4288bdac3        29 seconds ago      1.09GB
+backend-exercise    3.1                d4b163ef58ce        5 minutes ago       930MB

@@ -1,0 +1,18 @@
+docker container run -d --name nginx_1 nginx
+docker container run -d --name nginx_2 nginx
+docker container run -d --name nginx_3 nginx
+
+docker container stop nginx_1
+docker container stop nginx_2
+docker container list -a
+
+
+# Scripted
+for num in {1..3}; do docker container run -d --name "nginx_$num" nginx; done
+for num in {1..2}; do docker container stop "nginx_$num"; done
+docker container list -a
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+06cbfb856037        nginx               "/docker-entrypoint.…"   12 seconds ago      Up 11 seconds              80/tcp              nginx_3
+44a38c3e17dc        nginx               "/docker-entrypoint.…"   12 seconds ago      Exited (0) 5 seconds ago                       nginx_2
+65babba4947e        nginx               "/docker-entrypoint.…"   12 seconds ago      Exited (0) 5 seconds ago                       nginx_1

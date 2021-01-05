@@ -1,0 +1,2 @@
+docker container run -d --name exec_exercise devopsdockeruh/exec_bash_exercise
+docker container exec exec_exercise tail -f ./logs.txt

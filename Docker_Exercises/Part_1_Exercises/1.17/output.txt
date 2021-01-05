@@ -1,0 +1,1 @@
+Publish offprem on Docker Hub

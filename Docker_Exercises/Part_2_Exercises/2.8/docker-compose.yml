@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    image: frontend-exercise:2.8
+    container_name: frontend-example
+    networks:
+      - nginx
+  backend:
+    build: ./backend
+    image: backend-exercise:2.8
+    container_name: backend-example
+    volumes:
+      - ./backend/logs.txt:/backend-example-docker/logs.txt
+    networks:
+      - redis
+      - postgres
+      - nginx
+    environment:
+      - REDIS=cache
+      - REDIS_PORT=6379
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=example
+      - DB_HOST=db
+  cache:
+    image: redis
+    container_name: redis-cache
+    restart: unless-stopped
+    networks:
+      - redis
+  db:
+    image: postgres
+    container_name: db_backend
+    restart: unless-stopped
+    volumes:
+      - database:/var/lib/postgresql/data
+    networks:
+      - postgres
+    environment:
+      - POSTGRES_PASSWORD=example
+  load-balancer:
+    image: nginx
+    container_name: lb_nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - nginx
+
+volumes:
+  database:
+networks:
+  nginx:
+  redis:
+  postgres:
