@@ -18,4 +18,4 @@ ENV RAILS_ENV=production
 RUN rails db:migrate && rake assets:precompile
 CMD ["rails", "s", "-e", "production"]
 
-# docker image build -t exercise:14 . && docker container run -p 3000:3000 --name rials-example -d --rm exercise:14
+# docker image build -t exercise:14 . && docker container run -p 3000:3000 --name rails-example -d --rm exercise:14
